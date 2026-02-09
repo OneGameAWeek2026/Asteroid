@@ -1,15 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxgn436qxw3sw"]
+[gd_scene load_steps=15 format=3 uid="uid://bxgn436qxw3sw"]
 
 [ext_resource type="Texture2D" uid="uid://b8p25jupm5qkg" path="res://Sprites/BG.png" id="1_bo1nx"]
-[ext_resource type="Script" uid="uid://wl0kerdyhh68" path="res://Scenes/GameManager.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://wl0kerdyhh68" path="res://Scripts/GameManager.gd" id="1_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://b400tla37c43i" path="res://Sprites/Ship.png" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://b2tecs26ca1hd" path="res://Scripts/player.gd" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://crsjbrspiy0xs" path="res://Prefabs/asteroid_mid.tscn" id="5_kry3j"]
+[ext_resource type="FontFile" uid="uid://de4fx6ib6dab6" path="res://Y224-2vdae.ttf" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://br0hyhrm1cvbp" path="res://Prefabs/asteroid_big.tscn" id="6_344ge"]
+[ext_resource type="PackedScene" uid="uid://brlo7tp1yv0li" path="res://Prefabs/asteroid_small.tscn" id="7_ynf5e"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jjvhh"]
 diffuse_texture = ExtResource("1_bo1nx")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kry3j"]
 diffuse_texture = ExtResource("2_8gbba")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21xkr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bp64"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6862745)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_344ge"]
+bg_color = Color(0.4236506, 0.42365065, 0.42365053, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynf5e"]
+bg_color = Color(0.71004206, 0.5688365, 0.45506084, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jjvhh")
@@ -33,4 +48,109 @@ polygon = PackedVector2Array(4, -30.1, -4, -32.1, -4, -28, -24, 26.099998, -24, 
 [node name="Barrel" type="Marker2D" parent="Player"]
 position = Vector2(0, -38)
 
+[node name="AsteroidHolder" type="Node2D" parent="."]
+
+[node name="AsteroidMid" parent="AsteroidHolder" instance=ExtResource("5_kry3j")]
+position = Vector2(624, 348)
+
+[node name="AsteroidMid2" parent="AsteroidHolder" instance=ExtResource("5_kry3j")]
+position = Vector2(1471, 764)
+
+[node name="AsteroidMid3" parent="AsteroidHolder" instance=ExtResource("5_kry3j")]
+position = Vector2(1413, 297)
+
+[node name="BigAsteriod" parent="AsteroidHolder" instance=ExtResource("6_344ge")]
+position = Vector2(337, 776)
+
+[node name="AsteroidSmall" parent="AsteroidHolder" instance=ExtResource("7_ynf5e")]
+position = Vector2(1025, 756)
+
 [node name="LaserHolder" type="Node2D" parent="."]
+
+[node name="GameOverScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_right = 1921.0
+offset_bottom = 1081.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameOverScreen"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -499.5
+offset_top = -234.5
+offset_right = 499.5
+offset_bottom = -132.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_21xkr")
+theme_override_font_sizes/font_size = 101
+text = "GAME OVER"
+
+[node name="Button" type="Button" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -22.5
+offset_right = 262.0
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_21xkr")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_21xkr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6bp64")
+theme_override_styles/hover = SubResource("StyleBoxFlat_344ge")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ynf5e")
+text = "  Try Again  "
+
+[node name="LivesLabel" type="Label" parent="."]
+offset_left = 45.0
+offset_top = 125.0
+offset_right = 785.0
+offset_bottom = 182.0
+theme_override_fonts/font = ExtResource("6_21xkr")
+theme_override_font_sizes/font_size = 41
+text = "Lives: 3"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 37.0
+offset_top = 41.0
+offset_right = 777.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("6_21xkr")
+theme_override_font_sizes/font_size = 56
+text = "Score: 12345"
+
+[node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -3.0
+
+[connection signal="pressed" from="GameOverScreen/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

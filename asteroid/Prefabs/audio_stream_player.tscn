@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://jshsu7rwsvm4"]
+
+[ext_resource type="AudioStream" uid="uid://3u7a65qfq3vb" path="res://Sounds/explode.wav" id="1_m5u8x"]
+[ext_resource type="Script" uid="uid://c56le0jy8bmn2" path="res://Scripts/audio_stream_player.gd" id="2_dvodw"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_m5u8x")
+script = ExtResource("2_dvodw")
