@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ji1rcxtmr66"]
+
+[ext_resource type="Texture2D" uid="uid://cco58vdvu04rs" path="res://Sprites/Shot.png" id="1_c46e2"]
+[ext_resource type="Script" uid="uid://5eq60ri26jpt" path="res://Scripts/shot.gd" id="1_ut6nt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ut6nt"]
+diffuse_texture = ExtResource("1_c46e2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coylj"]
+size = Vector2(85, 7)
+
+[node name="Shot" type="Area2D"]
+rotation = 1.5707964
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_ut6nt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_ut6nt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_coylj")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
